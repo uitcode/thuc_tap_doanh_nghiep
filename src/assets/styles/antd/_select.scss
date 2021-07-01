@@ -1,0 +1,27 @@
+#select_ {
+  .anticon {
+    vertical-align: 1px;
+  }
+
+  .ant-select-selector {
+    @apply shadow-none;
+  }
+
+  .ant-select-selection-item-remove {
+    @apply flex items-center;
+  }
+}
+
+.ant-select-dropdown-placement-bottomLeft {
+  @apply border border-t-0 border-primary rounded-b shadow-none -mt-1.5 pt-1.5;
+  border-radius: 0 0 6px 6px;
+}
+
+.ant-select-dropdown-placement-topLeft {
+  @apply border border-b-0 border-primary rounded-t shadow-none -mb-1.5 pb-1.5;
+  border-radius: 6px 6px 0 0;
+}
+
+.ant-select-item-option {
+  @apply items-center;
+}

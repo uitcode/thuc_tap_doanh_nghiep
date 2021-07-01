@@ -1,0 +1,133 @@
+<section id="app-navbar" class="bg-white h-full border-warmGray-200 border-b relative">
+  <ngx-loading-bar [includeSpinner]="false" [height]="'2px'" [color]="'#78716C'"></ngx-loading-bar>
+  <div class="flex h-full px-4">
+    <div class="toggle w-fit flex items-center justify-center">
+      <i
+        nz-icon
+        nzType="menu"
+        class="hidden md:block text-warmGray-800 text-xl cursor-pointer"
+        nzTheme="outline"
+        (click)="toggleSidebar()"
+      ></i>
+      <div class="logo block md:hidden h-fit w-full">
+        <a class="flex h-14" [routerLink]="['/dashboard']">
+          <div class="w-10 flex items-center justify-center">
+            <img [src]="logo" class="w-10" />
+          </div>
+          <div class="h-full flex flex-grow w-40 items-center">
+            <div class="flex-grow flex w-0 uppercase">
+              <span class="text-warmGray-800 text-sm font-semibold">Kết Nối </span>
+              <div class="icon-connect flex flex-col text-sm mx-1">
+                <i nz-icon nzType="swap-left" nzTheme="outline" class="swap-left"></i>
+                <i
+                  nz-icon
+                  nzType="swap-right"
+                  nzTheme="outline"
+                  class="-scale-y-1 -mt-1.75 swap-right"
+                ></i>
+              </div>
+              <span class="text-red-600 text-sm font-semibold">Xây Dựng</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="flex-grow w-0"></div>
+    <div class="w-fit flex items-center justify-end">
+      <nz-badge
+        nz-popover
+        [nzPopoverContent]="notiTemplate"
+        nzPopoverPlacement="bottom"
+        nzPopoverOverlayClassName="noti"
+        [(nzPopoverVisible)]="visibleNotification"
+        [nzPopoverTrigger]="'click'"
+        (click)="showNotificationList()"
+        class="mr-5 cursor-pointer"
+        [nzCount]="5"
+        nz-tooltip
+        nzTooltipPlacement="bottom"
+        nzTooltipTitle="thông báo"
+        [nzTooltipMouseEnterDelay]="0.5"
+      >
+        <i nz-icon nzType="bell" nzTheme="outline" class="text-xl"></i>
+      </nz-badge>
+
+      <ng-template #notiTemplate>
+        <div class="profile-popover w-72 h-80 overflow-y-scroll">
+          <div
+            *ngFor="let noti of listNoti; let i = index"
+            class="inline-block px-2 py-1.5 rounded hover:bg-warmGray-100 my-1 cursor-pointer"
+            [class.bg-warmGray-50]="!noti.seen"
+          >
+            <div class="flex">
+              <div class="flex-grow w-0" [class.font-semibold]="!noti.seen">
+                Tên thông báo {{ i }}
+              </div>
+              <div class="text-xs text-gray-400">{{ noti.time }} trước</div>
+            </div>
+            <div class="text-gray-400 text-sm">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <div
+        nz-popover
+        class="flex items-center cursor-pointer"
+        [nzPopoverContent]="profileContentTemplate"
+        nzPopoverPlacement="bottomRight"
+        nzPopoverOverlayClassName="profile"
+        [(nzPopoverVisible)]="visibleProfile"
+        [nzPopoverTrigger]="'click'"
+        (click)="showProfile()"
+      >
+        <nz-avatar
+          class="mr-2 bg-blue-100 text-blue-500"
+          nzIcon="user"
+          [nzSrc]="avatar"
+        ></nz-avatar>
+        <div class="flex-grow mr-2 hidden md:block">
+          <div class="text-gray-700 text-sm font-semibold">{{ displayName }}</div>
+          <div class="text-gray-400 text-xs">{{ role }}</div>
+        </div>
+        <i nz-icon nzType="down" class="text-tiny mr-2 hidden md:block" nzTheme="outline"></i>
+      </div>
+      <ng-template #profileContentTemplate>
+        <div class="profile-popover w-36 h-fit" (click)="visibleProfile = !visibleProfile">
+          <div
+            class="
+              flex
+              items-center
+              px-4
+              py-2
+              cursor-pointer
+              rounded
+              bg-warmGray-50
+              hover:bg-warmGray-200
+              mb-2
+            "
+            [routerLink]="['/me']"
+          >
+            <i nz-icon nzType="user" nzTheme="outline" class="mr-2"></i> Tài khoản
+          </div>
+          <div
+            class="
+              flex
+              items-center
+              px-4
+              py-2
+              cursor-pointer
+              rounded
+              bg-warmGray-50
+              hover:bg-warmGray-200
+            "
+            (click)="logout()"
+          >
+            <i nz-icon nzType="logout" nzTheme="outline" class="mr-2 text-red-800"></i> Đăng xuất
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</section>

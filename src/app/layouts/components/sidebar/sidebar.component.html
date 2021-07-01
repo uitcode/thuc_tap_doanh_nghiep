@@ -1,0 +1,138 @@
+<section id="app-sidebar" class="bg-warmGray-800 h-full flex flex-col text-white">
+  <div
+    class="logo h-14 bg-white md:bg-warmGray-800"
+    [class]="mainLayoutService.toggle ? 'toggle-show' : 'toggle-hidden'"
+  >
+    <div class="hidden md:flex h-14 px-2 border-warmGray-700 border-b toggle-area">
+      <a class="w-14 flex items-center justify-center" [routerLink]="['/dashboard']">
+        <img [src]="logo" class="w-10" />
+      </a>
+      <div class="h-full flex flex-grow w-0 items-center toggle">
+        <a class="flex-grow flex w-0 uppercase" [routerLink]="['/dashboard']">
+          <span class="text-white text-sm">Kết Nối </span>
+          <div class="icon-connect flex flex-col text-sm mx-1">
+            <i nz-icon nzType="swap-left" nzTheme="outline" class="swap-left"></i>
+            <i
+              nz-icon
+              nzType="swap-right"
+              nzTheme="outline"
+              class="-scale-y-1 -mt-1.75 swap-right"
+            ></i>
+          </div>
+          <span class="text-red-600 text-sm font-semibold">Xây Dựng</span>
+        </a>
+        <div class="px-1.5 w-fit flex lg:hidden items-center">
+          <i
+            nz-icon
+            nzType="close"
+            nzTheme="outline"
+            class="text-xl cursor-pointer text-white"
+            (click)="mainLayoutService.close()"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div
+      [routerLink]="['/me']"
+      (click)="mainLayoutService.close(innerWidth)"
+      class="flex md:hidden items-center cursor-pointer h-full px-6"
+    >
+      <nz-avatar class="mr-2 bg-blue-100 text-blue-500" nzIcon="user" [nzSrc]="avatar"></nz-avatar>
+      <div class="mr-2">
+        <div class="text-gray-700 text-sm font-semibold">{{ displayName }}</div>
+        <div class="text-gray-400 text-xs">{{ roleName }}</div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="role === 'constructor' || role === 'supplier'"
+    class="pt-4"
+    [class]="mainLayoutService.toggle ? 'toggle-show' : 'toggle-hidden'"
+  >
+    <a class="toggle-area flex p-2 mr-0.5">
+      <button nz-button nzType="primary" class="toggle uppercase flex-grow w-0 p-0">
+        {{ role === 'constructor' ? 'Đặt hàng' : 'Tạo đơn hàng' }}
+      </button>
+      <nz-badge class="mx-4 flex items-center" [nzCount]="5">
+        <i nz-icon nzType="shopping-cart" nzTheme="outline" class="text-2xl text-white"></i>
+      </nz-badge>
+    </a>
+  </div>
+  <div
+    class="menu px-2 flex-grow h-0 overflow-y-auto overflow-smooth overflow-x-hidden"
+    [class]="mainLayoutService.toggle ? 'toggle-show' : 'toggle-hidden'"
+  >
+    <a
+      *ngFor="let item of navigationsRole"
+      class="
+        flex
+        h-10
+        w-auto
+        my-2
+        md:hover:text-trueGray-50
+        md:hover:bg-warmGray-600
+        hover:text-trueGray-500
+        rounded
+        cursor-pointer
+        toggle-area
+      "
+      [class]="
+        mainLayoutService.navigation === item.url
+          ? 'text-trueGray-50 bg-warmGray-600'
+          : 'text-trueGray-500'
+      "
+      [routerLink]="[item.url]"
+      (click)="mainLayoutService.close(innerWidth)"
+    >
+      <div
+        class="w-14 flex items-center justify-center"
+        [nzTooltipTitle]="item.title"
+        nzTooltipPlacement="right"
+        [nzTooltipMouseEnterDelay]="mainLayoutService.toggle ? 9999 : 0.3"
+        nz-tooltip
+      >
+        <i nz-icon [nzType]="item.icon" nzTheme="outline" class="text-xl"></i>
+      </div>
+      <div class="h-full flex flex-grow w-0 items-center toggle font-normal hover:font-semibold">
+        {{ item.title }}
+      </div>
+    </a>
+  </div>
+  <div
+    class="menu-bottom px-2 h-fit mt-8"
+    [class]="mainLayoutService.toggle ? 'toggle-show' : 'toggle-hidden'"
+  >
+    <div
+      *ngFor="let item of navigations_bottom"
+      class="
+        flex
+        h-10
+        w-auto
+        my-2
+        hover:text-trueGray-50
+        hover:bg-warmGray-500
+        rounded
+        cursor-pointer
+        toggle-area
+      "
+      [class]="
+        mainLayoutService.navigation === item.url
+          ? 'text-trueGray-50 bg-warmGray-600'
+          : 'text-trueGray-500'
+      "
+    >
+      <div
+        class="w-14 flex items-center justify-center"
+        [nzTooltipTitle]="item.title"
+        nzTooltipPlacement="right"
+        [nzTooltipMouseEnterDelay]="mainLayoutService.toggle ? 9999 : 0.3"
+        nz-tooltip
+      >
+        <i nz-icon [nzType]="item.icon" nzTheme="outline" class="text-xl"></i>
+      </div>
+      <div class="h-full flex flex-grow w-0 items-center toggle font-normal hover:font-semibold">
+        {{ item.title }}
+      </div>
+    </div>
+  </div>
+</section>

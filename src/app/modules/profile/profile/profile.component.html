@@ -1,0 +1,176 @@
+<section id="app-profile">
+  <div class="bg-white rounded-md">
+    <div class="flex justify-center h-auto">
+      <div class="py-5 px-5 sm:px-8 h-full area-info">
+        <div class="flex mb-8">
+          <div class="avatar w-fit h-full flex items-center relative">
+            <div
+              class="
+                upload-avatar
+                rounded-full
+                h-6
+                w-6
+                xs:h-8
+                xs:w-8
+                sm:h-10
+                sm:w-10
+                bg-white
+                border border-warmGray-200
+                absolute
+                flex
+                items-center
+                justify-center
+                sm:-right-0.5
+                sm:bottom-0.5
+                lg:right-1
+                lg:bottom-2
+                -right-1
+                bottom-1
+                cursor-pointer
+                hover:shadow-md
+              "
+              nzTooltipTitle="cập nhật ảnh đại diện"
+              nzTooltipPlacement="top"
+              nz-tooltip
+            >
+              <i
+                nz-icon
+                nzType="camera"
+                nzTheme="twotone"
+                [nzTwotoneColor]="'#991B1B'"
+                class="text-xs xs:text-base sm:text-xl"
+                (click)="chooseAvatar()"
+              ></i>
+            </div>
+            <input
+              type="file"
+              #eleInputAvatar
+              (change)="selectFile($event)"
+              hidden
+              accept="image/png, image/gif, image/jpeg"
+            />
+            <img
+              class="w-20 xs:w-24 sm:w-32 lg:w-36 h-20 xs:h-24 sm:h-32 lg:h-36 rounded-full"
+              [src]="previewAvatarImage ? previewAvatarImage : avatar ? avatar : avatarDefault"
+            />
+            <app-loading
+              [color]="'#F5F5F4'"
+              [isCenter]="false"
+              *ngIf="isLoadingAvatar"
+              class="absolute left-1/2 top-1/2 transformXY-50"
+            ></app-loading>
+          </div>
+          <div class="flex-grow w-0 ml-4 flex items-center">
+            <div>
+              <p class="font-semibold text-xl xs:text-xl sm:text-2xl">
+                {{ userInfo?.display_name ? userInfo?.display_name : 'No Name' }}
+              </p>
+              <p class="text-sm sm:text-base">
+                <span class="text-warmGray-400">Ngày tham gia hệ thống: </span>
+                {{ userInfo?.created_at | dateFormat: 'DD/MM/YYYY' }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xl font-semibold line py-2 mb-4 relative">Thông tin tài khoản</div>
+        <form
+          nz-form
+          [formGroup]="registerForm"
+          class="w-full mb-4"
+          [nzLayout]="innerWidth >= 425 ? 'vertical' : 'horizontal'"
+          (ngSubmit)="updateInfo()"
+        >
+          <!---- name ----->
+          <div class="block xs:flex">
+            <nz-form-label nzRequired class="w-ful xs:w-32">Tên hiển thị</nz-form-label>
+            <nz-form-item class="flex-grow w-full xs:w-0">
+              <nz-form-control nzErrorTip="Vui lòng nhập tên hiển thị">
+                <input formControlName="display_name" nz-input placeholder="Nhập tên hiển thị" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <!---- email ----->
+          <div class="block xs:flex">
+            <nz-form-label nzRequired class="w-ful xs:w-32">Email</nz-form-label>
+            <nz-form-item class="flex-grow w-full xs:w-0 email">
+              <nz-form-control [nzErrorTip]="combineTplEmail">
+                <input formControlName="email" nz-input placeholder="Nhập email" />
+                <ng-template #combineTplEmail let-control>
+                  <ng-container *ngIf="control.hasError('pattern')"
+                    >Email không hợp lệ</ng-container
+                  >
+                  <ng-container *ngIf="control.hasError('required')"
+                    >Vui lòng nhập email</ng-container
+                  >
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div *ngIf="countdownResend">
+            <div class="mb-3 text-right">gửi lại sau {{ counter$ | async }} giây</div>
+          </div>
+          <ng-container *ngIf="!countdownResend">
+            <div
+              *ngIf="userInfo?.email_verified_at"
+              class="status-verifi flex items-center justify-end mb-3"
+            >
+              <i nz-icon nzType="check" nzTheme="outline" class="text-lime-500 mr-2"></i> email đã
+              xác thực
+            </div>
+            <div
+              *ngIf="!userInfo?.email_verified_at"
+              class="status-verifi flex items-center justify-end mb-3"
+            >
+              <span *ngIf="!isLoadingResendVerifyEmail" class="flex items-center">
+                <i
+                  nz-icon
+                  nzType="exclamation-circle"
+                  nzTheme="outline"
+                  class="text-yellow-400 mr-2"
+                ></i>
+                vui lòng
+                <a (click)="submitResendEmailVerification()" class="text-red-800 ml-1"
+                  >xác thực email</a
+                >
+              </span>
+              <span *ngIf="isLoadingResendVerifyEmail" class="flex items-center">
+                <i nz-icon nzType="loading" nzTheme="outline" class="mr-2"></i>
+                đang gửi yêu cầu xác thực...
+              </span>
+            </div>
+          </ng-container>
+          <!---- username ----->
+          <div class="block xs:flex">
+            <nz-form-label nzRequired class="w-ful xs:w-32">Tên đăng nhập</nz-form-label>
+            <nz-form-item class="flex-grow w-full xs:w-0">
+              <nz-form-control nzErrorTip="Vui lòng nhập tên đăng nhập">
+                <input formControlName="username" nz-input placeholder="Nhập tên đăng nhập" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </form>
+        <div class="action flex items-center justify-between">
+          <button
+            class="inline-flex items-center"
+            nz-button
+            nzType="default"
+            (click)="showModalChangePassword()"
+          >
+            Đổi mật khẩu
+          </button>
+          <button
+            class="ml-4 inline-flex items-center"
+            nz-button
+            nzType="primary"
+            [disabled]="isLoadingUpdateProfile"
+            [nzLoading]="isLoadingUpdateProfile"
+            (click)="submitEditProfile()"
+          >
+            Cập nhật
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

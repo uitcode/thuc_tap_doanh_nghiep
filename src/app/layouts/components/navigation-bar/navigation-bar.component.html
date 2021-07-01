@@ -1,0 +1,139 @@
+<section id="app-navigation-bar">
+  <div
+    class="
+      flex
+      md:hidden
+      items-center
+      justify-center
+      button-add
+      bg-white
+      w-10
+      h-10
+      border
+      rounded-full
+      absolute
+    "
+  >
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+    <div
+      class="
+        flex
+        items-center
+        justify-center
+        rounded-full
+        absolute
+        bg-red-500
+        w-4
+        h-4
+        count
+        text-white text-titiny
+      "
+    >
+      20
+    </div>
+  </div>
+  <div class="bg-white h-12 w-full flex flex-row border-t border-warmGray-200">
+    <div class="w-1/5 flex items-center justify-center">
+      <a
+        class="text-center flex flex-col"
+        (click)="toggleSidebar()"
+        [class]="mainLayoutService.toggle ? 'active' : 'link'"
+      >
+        <i
+          nz-icon
+          [nzType]="mainLayoutService.toggle ? 'close' : 'menu'"
+          nzTheme="outline"
+          class="text my-0.5 text-gray-900"
+        ></i>
+        <div class="text-xxs text-warmGray-500">
+          {{ mainLayoutService.toggle ? 'đóng' : 'menu' }}
+        </div>
+      </a>
+    </div>
+    <div class="w-1/5 flex items-center justify-center" *ngFor="let item of navigationsRole">
+      <a
+        class="text-center flex flex-col"
+        [class]="
+          mainLayoutService.navigation === item.url && !mainLayoutService.toggle ? 'active' : 'link'
+        "
+        [routerLink]="[item.url]"
+        (click)="hiddenSidebar()"
+      >
+        <i nz-icon [nzType]="item.icon" nzTheme="outline" class="text my-0.5"></i>
+        <div class="text-xxs">{{ item.sub_title }}</div>
+      </a>
+    </div>
+    <!-- <div class="w-1/5 flex items-center justify-center" [ngSwitch]="role">
+      <a
+        *ngSwitchCase="roles.constructor"
+        class="text-center flex flex-col"
+        [class]="
+          mainLayoutService.navigation === '/projects' && !mainLayoutService.toggle
+            ? 'active'
+            : 'link'
+        "
+        [routerLink]="['/projects']"
+        (click)="hiddenSidebar()"
+      >
+        <i nz-icon nzType="block" nzTheme="outline" class="text my-0.5"></i>
+        <div class="text-xxs">dự án</div>
+      </a>
+      <a
+        *ngSwitchCase="roles.supplier"
+        class="text-center flex flex-col"
+        [class]="
+          mainLayoutService.navigation === '/material' && !mainLayoutService.toggle
+            ? 'active'
+            : 'link'
+        "
+        [routerLink]="['/material']"
+        (click)="hiddenSidebar()"
+      >
+        <i nz-icon nzType="funnel-plot" nzTheme="outline" class="text my-0.5"></i>
+        <div class="text-xxs">vật tư</div>
+      </a>
+      <a
+        *ngSwitchCase="roles.admin"
+        class="text-center flex flex-col"
+        [class]="
+          mainLayoutService.navigation === '/contractors' && !mainLayoutService.toggle
+            ? 'active'
+            : 'link'
+        "
+        [routerLink]="['/contractors']"
+        (click)="hiddenSidebar()"
+      >
+        <i nz-icon nzType="medicine-box" nzTheme="outline" class="text my-0.5"></i>
+        <div class="text-xxs">nhà thầu</div>
+      </a>
+    </div>
+    <a
+      class="w-1/5 flex items-center justify-center"
+      [class]="
+        mainLayoutService.navigation === '/order' && !mainLayoutService.toggle ? 'active' : 'link'
+      "
+      [routerLink]="['/order']"
+      (click)="hiddenSidebar()"
+    >
+      <div class="text-center flex flex-col">
+        <i nz-icon nzType="shopping" nzTheme="outline" class="text my-0.5"></i>
+        <div class="text-xxs">đơn hàng</div>
+      </div>
+    </a>
+    <a
+      class="w-1/5 flex items-center justify-center"
+      [class]="
+        mainLayoutService.navigation === '/contract' && !mainLayoutService.toggle
+          ? 'active'
+          : 'link'
+      "
+      [routerLink]="['/contract']"
+      (click)="hiddenSidebar()"
+    >
+      <div class="text-center flex flex-col">
+        <i nz-icon nzType="audit" nzTheme="outline" class="text my-0.5"></i>
+        <div class="text-xxs">hợp đồng</div>
+      </div>
+    </a> -->
+  </div>
+</section>

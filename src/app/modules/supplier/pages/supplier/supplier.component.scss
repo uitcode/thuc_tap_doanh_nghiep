@@ -1,0 +1,21 @@
+@import 'breakpoints';
+
+#app-supplier {
+  .form-filter {
+    max-width: 400px;
+  }
+
+  ::ng-deep .ant-table-body {
+    border-right: 1px solid #e4e4e7;
+    border-bottom: 1px solid #e4e4e7;
+    border-radius: 0px 0px 6px 6px;
+  }
+
+  .last-row td {
+    border-bottom: 1px solid #e4e4e7;
+    
+    @include xl {
+      border-bottom: 1px solid #ffffff00;
+    }
+  }
+}

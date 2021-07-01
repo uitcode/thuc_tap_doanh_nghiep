@@ -1,0 +1,60 @@
+<div class="main-layout" id="app-main-layout">
+  <div class="flex relative">
+    <!--------- sidebar --------->
+    <div
+      class="transition-sidebar block w-64 lg:relative fixed z-900 h-full"
+      [class]="mainLayoutService.toggle ? 'ml-0' : 'w-18.5 -ml-64 md:ml-0'"
+      [style.height]="'calc(' + innerHeight + 'px - 48px)'"
+    >
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="rwd-w-sidebar"></div>
+
+    <!--------- content --------->
+    <div class="flex-grow flex flex-col relative w-0 bg-warmGray-100 h-screen">
+      <div
+        class=""
+        [style.height]="
+          mainLayoutService.toggle && innerWidth < 768
+            ? 'calc(' + innerHeight + 'px - 48px)'
+            : '0px'
+        "
+        [class]="
+          mainLayoutService.toggle && innerWidth < 768
+            ? 'overlay opacity-1 h-full transition-overlay-show fixed'
+            : 'opacity-0 h-0 transition-overlay-close'
+        "
+        (click)="mainLayoutService.close()"
+      ></div>
+      <div class="h-14">
+        <app-navbar></app-navbar>
+      </div>
+      <div
+        [class]="mainLayoutService.toggle && innerWidth < 768 ? 'fixed' : 'relative'"
+        class="
+          md:flex-grow
+          md:h-0
+          md:overflow-y-auto
+          overflow-smooth
+          bg-warmGray-100
+          pt-3
+          lg:pt-4
+          pl-3
+          lg:pl-4
+          pr-3
+          lg:pr-4
+          w-screen
+          md:w-full
+        "
+      >
+        <router-outlet *ngIf="true"></router-outlet>
+      </div>
+      <div class="h-fit bg-warmGray-100 px-5 pb-12 md:pb-0">
+        <app-footer></app-footer>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="innerWidth < 768" class="fixed bottom-0 w-full z-50">
+    <app-navigation-bar></app-navigation-bar>
+  </div>
+</div>

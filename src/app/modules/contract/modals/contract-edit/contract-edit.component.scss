@@ -1,0 +1,23 @@
+@import 'breakpoints';
+
+#app-contract-edit {
+  nz-form-item {
+    margin-bottom: 12px;
+  }
+
+  label.ant-form-item-required {
+    height: 28px;
+  }
+}
+
+::ng-deep .custom-date-picker {
+  margin-left: calc(100vw / -28 - 25px);
+
+  @include xs {
+   margin-left: 0;
+  }
+}
+
+::ng-deep .ant-picker-time-panel-column:nth-child(3) {
+  display: none;
+}

@@ -1,0 +1,70 @@
+#app-register {
+  .bg-auth {
+    background: url('/assets/images/background/auth-bg.png');
+    background-position: left center;
+    background-size: cover;
+    background-repeat: repeat;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  .register {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .-scale-y-1 {
+    transform: scaleY(-1);
+  }
+
+  .-mt-1\.75 {
+    margin-top: -7px;
+  }
+
+  .logo {
+    .swap-left {
+      @apply text-red-600;
+      transition: color 0.5s ease-in-out;
+    }
+
+    .swap-right {
+      @apply text-warmGray-800;
+      transition: color 0.5s ease-in-out;
+    }
+
+    &:hover {
+      .swap-left {
+        @apply text-warmGray-800;
+      }
+
+      .swap-right {
+        @apply text-red-600;
+      }
+    }
+  }
+
+  .password {
+    i {
+      cursor: pointer;
+    }
+  }
+
+  nz-form-item {
+    margin-bottom: 12px;
+  }
+
+  label.ant-form-item-required {
+    height: 28px;
+  }
+
+  .min-h-100 {
+    min-height: 100vh;
+  }
+
+  ::ng-deep .ant-form-item-tooltip {
+    @apply flex items-center mx-1.5;
+  }
+
+  ::ng-deep .ant-form-item-required::after {
+    display: none;
+  }
+}

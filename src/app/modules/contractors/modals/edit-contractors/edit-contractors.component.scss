@@ -1,0 +1,25 @@
+#app-edit-contractors {
+  nz-form-item {
+    margin-bottom: 12px;
+  }
+
+  label.ant-form-item-required {
+    height: 28px;
+  }
+}
+
+::ng-deep .choose-role-submit {
+  .ant-modal-close {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .ant-modal-footer .ant-btn {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+::ng-deep .ant-form-item-tooltip {
+  @apply flex items-center mx-1.5;
+}

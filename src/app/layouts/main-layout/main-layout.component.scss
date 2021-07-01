@@ -1,0 +1,58 @@
+@import 'breakpoints';
+
+#app-main-layout {
+  .transition-sidebar {
+    transition: margin-left 0.4s ease-in-out;
+
+    @include md {
+      transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+    }
+  }
+
+  .w-18\.5 {
+    @apply w-64;
+
+    @include md {
+      width: 4.625rem;
+    }
+  }
+
+  .rwd-w-sidebar {
+    width: 0;
+
+    @include md {
+      width: 4.625rem;
+    }
+
+    @include lg {
+      width: 0;
+    }
+  }
+
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 800;
+    @apply w-full;
+  }
+
+  .transition-overlay-close {
+    animation: overlayFadeIn 0.4s cubic-bezier(0.7, 0.3, 0.1, 1);
+  }
+
+  .transition-overlay-show {
+    transition: opacity 0.3s linear, height 0s ease 0.15s;
+  }
+
+  .z-900 {
+    z-index: 900;
+  }
+
+  @keyframes overlayFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 100;
+    }
+  }
+}

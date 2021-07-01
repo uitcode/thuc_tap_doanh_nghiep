@@ -1,0 +1,95 @@
+<section id="app-contract-edit">
+  <form nz-form nzLayout="vertical" [formGroup]="registerForm" class="w-full" (ngSubmit)="create()">
+    <!---- name ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Tên hợp đồng</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Vui lòng nhập tên hợp đồng">
+          <input formControlName="name" nz-input placeholder="Nhập tên hợp đồng" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- sub_name ----->
+    <div class="block">
+      <nz-form-label class="">Tên rút gọn</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <input formControlName="sub_name" nz-input placeholder="Nhập tên rút gọn" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- contractor ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Nhà thầu</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Vui lòng nhập tên nhà thầu">
+          <input formControlName="contractor" nz-input placeholder="Nhập tên nhà thầu" [disabled]="true" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- supplier ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Nhà cung cấp</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Vui lòng nhập tên nhà cung cấp">
+          <input formControlName="supplier" nz-input placeholder="Nhập tên nhà cung cấp" [disabled]="true" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- signed ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Ký kết</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <label
+            nz-checkbox
+            formControlName="contractor_check"
+            >Nhà thầu</label
+          >
+        </nz-form-control>
+        <nz-form-control>
+          <label
+            nz-checkbox
+            formControlName="supplier_check"
+            >Nhà cung cấp</label
+          >
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- signing date ----->
+    <div class="block">
+      <nz-form-label>Ngày ký kết</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-date-picker [nzInputReadOnly]="true" [nzDropdownClassName]="'custom-date-picker'" #elePickerSigning nzFormat="dd/MM/yyy HH:mm" nzShowTime="true" formControlName="signing_date" class="w-full"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- end date ----->
+    <div class="block">
+      <nz-form-label>Ngày kết thúc</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-date-picker [nzInputReadOnly]="true" [nzDropdownClassName]="'custom-date-picker'" #elePickerSigning nzFormat="dd/MM/yyy HH:mm" nzShowTime="true" formControlName="end_date" class="w-full"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- created date ----->
+    <div class="block">
+      <nz-form-label>Ngày tạo hợp đồng</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-date-picker [nzInputReadOnly]="true" [nzDropdownClassName]="'custom-date-picker'" #elePickerSigning nzFormat="dd/MM/yyy HH:mm" nzShowTime="true" formControlName="created_date" class="w-full"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <button class="hidden"></button>
+  </form>
+</section>

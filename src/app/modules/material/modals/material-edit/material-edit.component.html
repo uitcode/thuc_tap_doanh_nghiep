@@ -1,0 +1,49 @@
+<section id="app-material-edit">
+  <form nz-form nzLayout="vertical" [formGroup]="registerForm" class="w-full" (ngSubmit)="create()">
+    <!---- name ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Tên vật tư</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Vui lòng nhập tên vật tư">
+          <input formControlName="name" nz-input placeholder="Nhập tên vật tư" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <!---- price ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Đơn giá</nz-form-label>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="combineTpNumber">
+          <input formControlName="price" nz-input placeholder="Nhập đơn giá" type="number" />
+          <ng-template #combineTpNumber let-control>
+            <ng-container *ngIf="control.hasError('pattern')">Đơn giá phải là một số</ng-container>
+            <ng-container *ngIf="control.hasError('required')">Vui lòng nhập đơn giá</ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <!---- name ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Đơn vị tính</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Vui lòng nhập đơn vị tính">
+          <input
+            placeholder="Nhập đơn vị tính"
+            nz-input
+            formControlName="unit"
+            [nzAutocomplete]="auto"
+          />
+          <nz-autocomplete #auto>
+            <nz-auto-option
+              *ngFor="let option of options"
+              [nzValue]="option?.name"
+              [nzLabel]="option?.name"
+            >
+              {{ option?.name }}
+            </nz-auto-option>
+          </nz-autocomplete>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </form>
+</section>

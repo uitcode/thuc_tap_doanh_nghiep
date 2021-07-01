@@ -1,0 +1,84 @@
+@import 'variables';
+
+#app-sidebar {
+  ::ng-deep .ant-badge-count {
+    min-width: 14px;
+    height: 14px;
+    width: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 1px $warmGray-800;
+  }
+
+  ::ng-deep nz-badge-sup {
+    @apply text-titiny;
+    top: 7px;
+    left: 9px;
+  }
+
+  .toggle-area {
+    transition: width 0.3s ease-in-out, background-color 0.4s ease-out;
+    @apply whitespace-nowrap;
+  }
+
+  .toggle-hidden {
+    .toggle-area {
+      width: auto;
+
+      .toggle {
+        transition: margin-left 0.3s linear, opacity 0.25s ease, visibility 0.3s ease;
+        @apply opacity-0 invisible -ml-2.5;
+      }
+    }
+  }
+
+  .toggle-show {
+    .toggle-area {
+      width: auto;
+
+      .toggle {
+        transition: margin-left 0.3s linear, opacity 0.2s ease, visibility 0.3s ease;
+        @apply opacity-100 visible;
+      }
+    }
+  }
+
+  .-scale-y-1 {
+    transform: scaleY(-1);
+  }
+
+  .-mt-1\.75 {
+    margin-top: -7px;
+  }
+
+  .logo {
+    .swap-left {
+      @apply text-red-600;
+      transition: color 0.5s ease-in-out;
+    }
+
+    .swap-right {
+      @apply text-white;
+      transition: color 0.5s ease-in-out;
+    }
+
+    &:hover {
+      .swap-left {
+        @apply text-white;
+      }
+
+      .swap-right {
+        @apply text-red-600;
+      }
+    }
+  }
+}
+
+::ng-deep .profile2 {
+  left: 20px;
+
+  .ant-popover-content > .ant-popover-arrow {
+    @apply right-12;
+  }
+}

@@ -1,0 +1,154 @@
+<section id="app-edit-project">
+  <form nz-form nzLayout="vertical" [formGroup]="registerForm" class="w-full">
+    <!---- name ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Tên dự án</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Vui lòng nhập tên dự án">
+          <input formControlName="name" nz-input placeholder="Nhập tên dự án" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- short name ----->
+    <div class="block">
+      <nz-form-label class="">Tên rút gọn</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <input formControlName="sub_name" nz-input placeholder="Nhập tên rút gọn của dự án" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- status ----->
+    <div class="block">
+      <nz-form-label class="">Trạng thái</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-radio-group formControlName="is_active">
+            <label nz-radio [nzValue]="1">Hoạt động</label>
+            <label nz-radio [nzValue]="0">Chờ</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- supplier ----->
+    <div class="block">
+      <nz-form-label class="">Nhà cung cấp</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-select
+            [nzMaxTagPlaceholder]="tagPlaceHolderSupplier"
+            [nzOptionHeightPx]="36"
+            [nzOptionOverflowSize]="5"
+            [nzMaxTagCount]="4"
+            [compareWith]="compareFn"
+            nzMode="multiple"
+            nzPlaceHolder="Chọn nhà cung cấp"
+            formControlName="suppliers"
+            nzShowSearch
+            nzServerSearch
+            (nzOnSearch)="onSearch($event)"
+            (nzScrollToBottom)="loadMoreOptionSupplier()"
+          >
+            <nz-option
+              *ngFor="let supplier of listSupplier"
+              [nzLabel]="supplier.name"
+              [nzValue]="supplier"
+            ></nz-option>
+            <nz-option *ngIf="isLoadingSelect" nzDisabled nzCustomContent>
+              <div class="flex items-center">
+                <i nz-icon nzType="loading" class="loading-icon mr-2"></i> Đang lấy danh sách nhà
+                cung cấp...
+              </div>
+            </nz-option>
+          </nz-select>
+          <ng-template #tagPlaceHolderSupplier let-selectedList>
+            và {{ selectedList.length }} nhà cung cấp khác
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- address ----->
+    <div class="block">
+      <nz-form-label class="" nzRequired>Địa điểm</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Vui lòng chọn tỉnh / thành phố" class="mb-3">
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn tỉnh / thành phố"
+            formControlName="province_id"
+            [compareWith]="compareFn"
+            [nzOptionOverflowSize]="8"
+            (ngModelChange)="getDistrict($event)"
+          >
+            <nz-option
+              *ngFor="let province of listProvince | async"
+              [nzLabel]="province.name"
+              [nzValue]="province"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+        <nz-form-control nzErrorTip="Vui lòng chọn quận / huyện" class="mb-3">
+          <nz-select
+            *ngIf="registerForm.value.province_id?.name"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn quận / huyện"
+            formControlName="district_id"
+            [compareWith]="compareFn"
+            (ngModelChange)="getWard($event)"
+          >
+            <nz-option
+              *ngFor="let district of listDistrict | async"
+              [nzLabel]="district.name"
+              [nzValue]="district"
+            ></nz-option>
+          </nz-select>
+          <nz-select
+            *ngIf="!registerForm.value.province_id?.name"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn quận / huyện"
+            formControlName="district_id"
+            [nzDisabled]="true"
+          >
+            <nz-option nzLabel="default" nzValue="default"></nz-option>
+          </nz-select>
+        </nz-form-control>
+        <nz-form-control nzErrorTip="Vui lòng chọn phường / xã" class="mb-3">
+          <nz-select
+            *ngIf="registerForm.value.district_id?.name"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn phường / xã"
+            formControlName="ward_id"
+            [compareWith]="compareFn"
+          >
+            <nz-option
+              *ngFor="let ward of listWard | async"
+              [nzLabel]="ward.name"
+              [nzValue]="ward"
+            ></nz-option>
+          </nz-select>
+          <nz-select
+            *ngIf="!registerForm.value.district_id?.name"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn xã / phường"
+            formControlName="ward_id"
+            [nzDisabled]="true"
+          >
+            <nz-option nzLabel="default" nzValue="default"></nz-option>
+          </nz-select>
+        </nz-form-control>
+        <nz-form-control nzErrorTip="Vui lòng nhập địa chỉ">
+          <input formControlName="address" nz-input placeholder="Địa chỉ (số nhà, tên đường)" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </form>
+</section>

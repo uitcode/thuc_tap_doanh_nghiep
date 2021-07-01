@@ -1,0 +1,114 @@
+// Custom Theming for NG-ZORRO
+// For more information: https://ng.ant.design/docs/customize-theme/en
+// @import '../node_modules/ng-zorro-antd/ng-zorro-antd.less';
+@import '~ng-zorro-antd/style/entry.less'; /* Import base styles */
+@import '~ng-zorro-antd/button/style/entry.less';
+@import '~ng-zorro-antd/input/style/entry.less';
+@import '~ng-zorro-antd/select/style/entry.less';
+@import '~ng-zorro-antd/badge/style/entry.less';
+@import '~ng-zorro-antd/collapse/style/entry.less';
+@import '~ng-zorro-antd/dropdown/style/entry.less';
+@import '~ng-zorro-antd/avatar/style/entry.less';
+@import '~ng-zorro-antd/popover/style/entry.less';
+@import '~ng-zorro-antd/tooltip/style/entry.less';
+@import '~ng-zorro-antd/form/style/entry.less';
+@import '~ng-zorro-antd/table/style/entry.less';
+@import '~ng-zorro-antd/popconfirm/style/entry.less';
+@import '~ng-zorro-antd/notification/style/entry.less';
+@import '~ng-zorro-antd/date-picker/style/entry.less';
+@import '~ng-zorro-antd/time-picker/style/entry.less';
+@import '~ng-zorro-antd/modal/style/entry.less';
+@import '~ng-zorro-antd/checkbox/style/entry.less';
+@import '~ng-zorro-antd/auto-complete/style/entry.less';
+
+@primary-color: #991b1b;
+@error-color: #ef4444;
+
+@border-radius-base: 6px;
+
+// height rules
+@height-base: 36px;
+@height-sm: 30px;
+
+// Select
+@select-dropdown-height: 36px;
+
+//Dropdown
+@dropdown-edge-child-vertical-padding: 0;
+
+// Badge
+@badge-color: #ef4444;
+
+// Button
+// @btn-font-size-sm: @font-size-base;
+
+// Tabel
+@table-header-bg: #f1efef;
+
+// Disabled states
+// @disabled-color: #ffffff;
+// @disabled-bg: #991b1b;
+.ant-btn-primary[disabled],
+.ant-btn-primary[disabled]:hover {
+  opacity: 0.5;
+  color: #ffffff;
+  background: #991b1b;
+}
+
+.ant-checkbox-inner {
+  border-radius: 4px;
+}
+
+.ant-popover-inner-content {
+  padding: 12px 12px;
+}
+
+.ant-modal-close-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.ant-pagination-disabled .ant-pagination-item-link,
+.ant-pagination-disabled:hover .ant-pagination-item-link,
+.ant-pagination-disabled:focus-visible .ant-pagination-item-link,
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link,
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-pagination-disabled .ant-pagination-item-link {
+  color: rgba(0, 0, 0, 0.25);
+  border-color: #d9d9d9;
+  cursor: not-allowed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-pagination-next .ant-pagination-item-link,
+.ant-pagination-prev .ant-pagination-item-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-select-selection-item-remove {
+  display: flex !important;
+  align-items: center;
+}
+
+.ant-table-container {
+  border-bottom-left-radius: 6px;
+}
+
+.ant-table-cell-fix-left,
+.ant-table-cell-fix-right {
+  z-index: 0;
+}

@@ -1,0 +1,43 @@
+@import 'breakpoints';
+
+#app-profile {
+  .area-info {
+    width: 100%;
+
+    @include sm {
+      width: 576px;
+      max-width: 576px;
+    }
+  }
+
+  nz-form-item {
+    margin-bottom: 12px;
+  }
+
+  nz-form-item.email {
+    margin-bottom: 2px;
+  }
+
+  nz-form-label {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    padding-bottom: 0;
+  }
+
+  label.ant-form-item-required {
+    height: 28px;
+  }
+
+  .line {
+    &::after {
+      content: '';
+      height: 3px;
+      width: 100px;
+      background: #991b1b;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}

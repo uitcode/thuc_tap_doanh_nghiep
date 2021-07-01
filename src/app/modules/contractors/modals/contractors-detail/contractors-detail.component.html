@@ -1,0 +1,65 @@
+<div class="text-warmGray-600 text-lg mb-3">
+  <span class="font-semibold">{{ contractors?.name }} </span
+  ><span
+    class="text-sm text-warmGray-400"
+    nzTooltipTitle="tên rút gọn"
+    nzTooltipPlacement="top"
+    nz-tooltip
+    >({{ contractors?.sub_name }})</span
+  >
+</div>
+
+<!-- <div class="flex mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="alert" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Trạng thái:</span>
+  </div>
+  <div class="flex-grow w-0 flex items-center">
+    <span class="mr-2">{{ project.status ? 'hoạt động' : 'chờ' }}</span>
+    <nz-badge *ngIf="!project.status" nzStatus="processing"></nz-badge>
+    <nz-badge *ngIf="project.status" nzStatus="success"></nz-badge>
+  </div>
+</div> -->
+
+<div class="flex items-start mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="phone" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Số điện thoại:</span>
+  </div>
+  <div class="flex-grow w-0">{{ contractors?.phone }}</div>
+</div>
+
+<div class="flex items-start mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="idcard" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Mã số thuế:</span>
+  </div>
+  <div class="flex-grow w-0">{{ contractors?.tax_number }}</div>
+</div>
+
+<div class="flex items-start mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="mail" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Email:</span>
+  </div>
+  <div class="flex-grow w-0">{{ contractors?.email }}</div>
+</div>
+
+<div class="flex items-start mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="environment" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Địa chỉ:</span>
+  </div>
+  <div class="flex-grow w-0">
+    {{ contractors?.location?.address }}, {{ contractors?.location?.ward?.name }},
+    {{ contractors?.location?.district?.name }}, {{ contractors?.location?.province?.name }}
+  </div>
+</div>
+
+<div class="flex items-start mb-0.5">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="calendar" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Ngày tham gia:</span>
+  </div>
+  <div class="flex-grow w-0">{{ contractors?.created_at | dateFormat: 'DD/MM/YYYY' }}</div>
+</div>

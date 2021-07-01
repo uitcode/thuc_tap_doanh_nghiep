@@ -1,0 +1,51 @@
+<div class="text-warmGray-600 text-lg mb-3">
+  <span class="font-semibold">{{ project?.name }} </span
+  ><span
+    class="text-sm text-warmGray-400"
+    nzTooltipTitle="tên rút gọn"
+    nzTooltipPlacement="top"
+    nz-tooltip
+    >({{ project?.sub_name }})</span
+  >
+</div>
+
+<div class="flex mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="alert" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Trạng thái:</span>
+  </div>
+  <div class="flex-grow w-0 flex items-center">
+    <span class="mr-2">{{ project?.is_active ? 'hoạt động' : 'chờ' }}</span>
+    <nz-badge *ngIf="!project?.is_active" nzStatus="processing"></nz-badge>
+    <nz-badge *ngIf="project?.is_active" nzStatus="success"></nz-badge>
+  </div>
+</div>
+
+<div class="flex items-start mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="shop" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Nhà cung cấp:</span>
+  </div>
+  <div class="flex-grow w-0">
+    <div *ngFor="let supplier of project?.suppliers" class="mr-2">- {{ supplier.name }}</div>
+  </div>
+</div>
+
+<div class="flex items-start mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="environment" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Địa điểm:</span>
+  </div>
+  <div class="flex-grow w-0">
+    {{ project?.location?.address }}, {{ project?.location?.ward?.name }},
+    {{ project?.location?.district?.name }}, {{ project?.location?.province?.name }}
+  </div>
+</div>
+
+<div class="flex items-start mb-0.5">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="calendar" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Ngày tạo:</span>
+  </div>
+  <div class="flex-grow w-0">{{ project?.created_at | dateFormat: 'DD/MM/YYYY' }}</div>
+</div>

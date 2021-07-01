@@ -1,0 +1,48 @@
+#app-choose-role {
+  .bg-auth {
+    background: url('/assets/images/background/auth-bg.png');
+    background-position: left center;
+    background-size: cover;
+    background-repeat: repeat;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  .modal-not-submit {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .-scale-y-1 {
+    transform: scaleY(-1);
+  }
+
+  .-mt-1\.75 {
+    margin-top: -7px;
+  }
+
+  .logo {
+    .swap-left {
+      @apply text-red-600;
+      transition: color 0.5s ease-in-out;
+    }
+
+    .swap-right {
+      @apply text-warmGray-800;
+      transition: color 0.5s ease-in-out;
+    }
+
+    &:hover {
+      .swap-left {
+        @apply text-warmGray-800;
+      }
+
+      .swap-right {
+        @apply text-red-600;
+      }
+    }
+  }
+
+  .selected {
+    @apply bg-lime-200 border-lime-600;
+  }
+}

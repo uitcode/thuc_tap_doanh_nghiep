@@ -1,0 +1,52 @@
+#app-navigation-bar {
+  .active {
+    i {
+      @apply text-red-600;
+    }
+
+    div {
+      @apply text-red-700;
+    }
+
+    &:hover {
+      i {
+        @apply text-red-600;
+      }
+
+      div {
+        @apply text-red-700;
+      }
+    }
+  }
+
+  .link {
+    i {
+      @apply text-gray-900;
+    }
+
+    div {
+      @apply text-warmGray-500;
+    }
+
+    &:hover {
+      i {
+        @apply text-gray-900;
+      }
+
+      div {
+        @apply text-warmGray-500;
+      }
+    }
+  }
+
+  .button-add {
+    top: -60px;
+    right: 20px;
+    z-index: 500;
+
+    .count {
+      top: -2px;
+      right: -2px;
+    }
+  }
+}

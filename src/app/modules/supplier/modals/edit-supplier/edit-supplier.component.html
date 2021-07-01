@@ -1,0 +1,237 @@
+<section id="app-edit-supplier">
+  <form nz-form nzLayout="vertical" [formGroup]="registerForm" class="w-full" (ngSubmit)="create()">
+    <!---- name ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Tên nhà cung cấp</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Vui lòng nhập tên nhà cung cấp">
+          <input formControlName="name" nz-input placeholder="Nhập tên nhà cung cấp" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- sub_name ----->
+    <div class="block">
+      <nz-form-label class="">Tên rút gọn</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <input formControlName="sub_name" nz-input placeholder="Nhập tên rút gọn" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- phone ----->
+    <div class="block">
+      <nz-form-label nzRequired class="">Số điện thoại</nz-form-label>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="combineTpPhone">
+          <input formControlName="phone" nz-input placeholder="Nhập số điện thoại" />
+          <ng-template #combineTpPhone let-control>
+            <ng-container *ngIf="control.hasError('regex_phone')"
+              >Số điện thoại không hợp lệ</ng-container
+            >
+            <ng-container *ngIf="control.hasError('required')"
+              >Vui lòng nhập số điện thoại</ng-container
+            >
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- tax_number ----->
+    <div class="block">
+      <nz-form-label class="">Mã số thuế</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <input formControlName="tax_number" nz-input placeholder="Nhập mã số thuế" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- email ----->
+    <div class="block">
+      <nz-form-label nzRequired>Email</nz-form-label>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="combineTplEmail">
+          <input formControlName="email" nz-input placeholder="Nhập email" />
+          <ng-template #combineTplEmail let-control>
+            <ng-container *ngIf="control.hasError('pattern')">Email không hợp lệ</ng-container>
+            <ng-container *ngIf="control.hasError('required')">Vui lòng nhập email</ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!---- address ----->
+    <div class="block">
+      <nz-form-label class="" nzRequired>Địa điểm</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Vui lòng chọn tỉnh / thành phố" class="mb-3">
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn tỉnh / thành phố"
+            formControlName="province_id"
+            [compareWith]="compareFn"
+            [nzOptionOverflowSize]="8"
+            (ngModelChange)="getDistrict($event)"
+          >
+            <nz-option
+              *ngFor="let province of listProvince | async"
+              [nzLabel]="province.name"
+              [nzValue]="province"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+        <nz-form-control nzErrorTip="Vui lòng chọn quận / huyện" class="mb-3">
+          <nz-select
+            *ngIf="registerForm.value.province_id?.name"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn quận / huyện"
+            formControlName="district_id"
+            [compareWith]="compareFn"
+            (ngModelChange)="getWard($event)"
+          >
+            <nz-option
+              *ngFor="let district of listDistrict | async"
+              [nzLabel]="district.name"
+              [nzValue]="district"
+            ></nz-option>
+          </nz-select>
+          <nz-select
+            *ngIf="!registerForm.value.province_id?.name"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn quận / huyện"
+            formControlName="district_id"
+            [nzDisabled]="true"
+          >
+            <nz-option nzLabel="default" nzValue="default"></nz-option>
+          </nz-select>
+        </nz-form-control>
+        <nz-form-control nzErrorTip="Vui lòng chọn phường / xã" class="mb-3">
+          <nz-select
+            *ngIf="registerForm.value.district_id?.name"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn phường / xã"
+            formControlName="ward_id"
+            [compareWith]="compareFn"
+          >
+            <nz-option
+              *ngFor="let ward of listWard | async"
+              [nzLabel]="ward.name"
+              [nzValue]="ward"
+            ></nz-option>
+          </nz-select>
+          <nz-select
+            *ngIf="!registerForm.value.district_id?.name"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn xã / phường"
+            formControlName="ward_id"
+            [nzDisabled]="true"
+          >
+            <nz-option nzLabel="default" nzValue="default"></nz-option>
+          </nz-select>
+        </nz-form-control>
+        <nz-form-control nzErrorTip="Vui lòng nhập địa chỉ">
+          <input formControlName="address" nz-input placeholder="Địa chỉ (số nhà, tên đường)" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <!-- <div class="block" *ngIf="isCreate">
+      <nz-form-item>
+        <nz-form-control>
+          <label
+            nz-checkbox
+            formControlName="create_account"
+            (ngModelChange)="showAddNewAccount($event)"
+            >Tạo tài khoản người dùng</label
+          >
+        </nz-form-control>
+      </nz-form-item>
+    </div> -->
+
+    <ng-container *ngIf="isCreate && !dataEdit">
+      <!---- email_login ----->
+
+      <div class="block">
+        <nz-form-label
+          nzRequired
+          nzTooltipTitle="Đây là email dùng để đăng nhập vào tài khoản nhà cung cấp, để tăng tính bảo mật cho tài khoản vui lòng hạn chế sử dụng chung email này với email liên hệ!"
+          [nzTooltipIcon]="iconInfo"
+          >Email đăng nhập</nz-form-label
+        >
+        <nz-form-item>
+          <nz-form-control [nzErrorTip]="combineTplEmailLogin">
+            <input formControlName="usermail" nz-input placeholder="Nhập email" />
+            <ng-template #combineTplEmailLogin let-control>
+              <ng-container *ngIf="control.hasError('pattern')">Email không hợp lệ</ng-container>
+              <ng-container *ngIf="control.hasError('required')">Vui lòng nhập email</ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!---- username ----->
+      <div class="block">
+        <nz-form-label nzRequired class="">Username</nz-form-label>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Vui lòng nhập username">
+            <input formControlName="username" nz-input placeholder="Nhập tên username" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <!---- password ----->
+      <div class="block password">
+        <nz-form-label
+          nzRequired
+          nzTooltipTitle="Mật khẩu từ 8 - 32 ký tự, phải bao gồm số, chữ thường và chữ hoa!"
+          [nzTooltipIcon]="iconInfo"
+          >Mật khẩu</nz-form-label
+        >
+        <nz-form-item>
+          <nz-form-control [nzErrorTip]="combineTplPassword">
+            <nz-input-group [nzSuffix]="suffixTemplate">
+              <input
+                [type]="passwordVisible ? 'text' : 'password'"
+                nz-input
+                placeholder="Nhập mật khẩu"
+                formControlName="password"
+              />
+              <ng-template #combineTplPassword let-control>
+                <ng-container
+                  *ngIf="
+                    !control.hasError('maxlength') &&
+                    !control.hasError('minlength') &&
+                    control.hasError('regex_characters')
+                  "
+                  >Mật khẩu phải bao gồm số, chữ thường và chữ hoa</ng-container
+                >
+                <ng-container *ngIf="control.hasError('maxlength')"
+                  >Mật khẩu không được quá 32 ký tự</ng-container
+                >
+                <ng-container *ngIf="control.hasError('minlength')"
+                  >Mật khẩu không được ít hơn 8 ký tự</ng-container
+                >
+                <ng-container *ngIf="control.hasError('required')"
+                  >Vui lòng nhập mật khẩu</ng-container
+                >
+              </ng-template>
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <i
+                nz-icon
+                [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                (click)="passwordVisible = !passwordVisible"
+              ></i>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </ng-container>
+    <button class="hidden"></button>
+  </form>
+</section>

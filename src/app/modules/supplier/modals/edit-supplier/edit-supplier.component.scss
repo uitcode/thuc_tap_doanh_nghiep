@@ -1,0 +1,13 @@
+#app-edit-supplier {
+  nz-form-item {
+    margin-bottom: 12px;
+  }
+
+  label.ant-form-item-required {
+    height: 28px;
+  }
+}
+
+::ng-deep .ant-form-item-tooltip {
+  @apply flex items-center mx-1.5;
+}

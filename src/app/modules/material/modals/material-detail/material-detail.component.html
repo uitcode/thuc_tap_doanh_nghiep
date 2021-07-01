@@ -1,0 +1,19 @@
+<div class="text-warmGray-600 text-lg mb-3">
+  <span class="font-semibold">{{ material?.name }} </span>
+</div>
+
+<div class="flex items-start mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="dollar" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Đơn giá:</span>
+  </div>
+  <div class="flex-grow w-0">{{ material?.price }}</div>
+</div>
+
+<div class="flex items-start mb-3">
+  <div class="w-36 flex items-center">
+    <i nz-icon nzType="tag" nzTheme="outline" class="text-red-800 mr-2"></i>
+    <span class="text-warmGray-400">Đơn vị tính:</span>
+  </div>
+  <div class="flex-grow w-0">{{ material?.unit }}</div>
+</div>

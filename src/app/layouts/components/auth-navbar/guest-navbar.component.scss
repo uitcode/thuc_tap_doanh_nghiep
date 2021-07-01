@@ -1,0 +1,54 @@
+#app-guest-navbar {
+  ::ng-deep .ant-badge-count {
+    min-width: 14px;
+    height: 14px;
+    width: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ::ng-deep nz-badge-sup {
+    @apply top-0.5 left-0.5 text-titiny;
+  }
+
+  ::ng-deep ngx-loading-bar {
+    position: absolute;
+    left: 0;
+    width: 100%;
+
+    .ngx-bar {
+      position: absolute;
+    }
+  }
+
+  .logo {
+    .swap-left {
+      @apply text-red-600;
+      transition: color 0.5s ease-in-out;
+    }
+
+    .swap-right {
+      @apply text-warmGray-800;
+      transition: color 0.5s ease-in-out;
+    }
+
+    &:hover {
+      .swap-left {
+        @apply text-warmGray-800;
+      }
+
+      .swap-right {
+        @apply text-red-600;
+      }
+    }
+  }
+
+  .-scale-y-1 {
+    transform: scaleY(-1);
+  }
+
+  .-mt-1\.75 {
+    margin-top: -7px;
+  }
+}
